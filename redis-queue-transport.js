@@ -4,6 +4,7 @@
 
 var _ = require('lodash')
 var Redis = require('redis')
+import emmitor from './src/event-emmitor/emittor'
 
 var internals = {
   defaults: {
@@ -55,6 +56,12 @@ module.exports = function (options) {
         }
 
         var outstr = tu.stringifyJSON(seneca, 'listen-' + type, out)
+
+        //this will not be sent to a another microservice as this is listning and not a client
+        //so emmiting the imas data and docker container id to data collection server
+
+        console.log('on message: ' + JSON.stringify(data.act.imas))
+        emmitor(data.act.imas)
         redisOut.lpush(topic + '_res' + '/' + data.origin, outstr, function (err, reply) {
           if (err) {
             seneca.log.error('transport', 'redis-queue', err)

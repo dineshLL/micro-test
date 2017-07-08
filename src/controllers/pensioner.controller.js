@@ -40,7 +40,7 @@ export default class PensionerController {
   }
 
   listPensioners = (args) => {
-    console.log(args);
+    console.log('this is from the controller: ' + JSON.stringify(args));
     return new Promise((resolve, reject) => {
       console.log('done reading the pensioner');
       const pensioner1 = {

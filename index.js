@@ -1,4 +1,5 @@
-import routes from './src/routing/index.routes';
+import routes from './src/routing/index.routes'
+import emmitor from './src/event-emmitor/emittor'
 
 let seneca = require('seneca')()
 seneca.use('./redis-queue-transport', {
@@ -19,5 +20,7 @@ seneca.use('./redis-queue-transport', {
   this.add({role: 'pensioner', cmd: 'list'}, routes.listPensionersHandler);
 
 });
+
+// seneca.on('act-in', emmitor)
 
 seneca.listen({type: 'redis-queue', pin: 'role: pensioner, cmd:*'})
