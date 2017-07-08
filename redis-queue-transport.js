@@ -35,6 +35,11 @@ module.exports = function (options) {
     var type = args.type
     var listenOptions = seneca.util.clean(_.extend({}, options[type], args))
     var useTopic = args.topic || 'seneca_any'
+
+    //setting the redis port manually
+    console.log('manually setting the port to: 6379')
+    listenOptions.port = 6379
+
     var redisIn = Redis.createClient(listenOptions.port, listenOptions.host)
     var redisOut = Redis.createClient(listenOptions.port, listenOptions.host)
 
@@ -88,6 +93,10 @@ module.exports = function (options) {
     var useTopic = args.topic || 'seneca_any'
     var redisIn
     var redisOut
+
+    //setting the redis port manually
+    console.log('manually setting the port to: 6379')
+    clientOptions.port = 6379
 
     tu.make_client(makeSend, clientOptions, clientdone)
 
