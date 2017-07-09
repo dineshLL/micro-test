@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "gulp serve",
+    "start": "SET IMAS_TAG=tag1 && gulp serve",
     "start:debug": "cross-env DEBUG=express-mongoose-es6-rest-api:* yarn start",
     "build": "gulp",
     "lint": "esw *.js server config --color",
@@ -19,7 +19,8 @@
   "license": "ISC",
   "dependencies": {
     "redis": "^2.7.1",
-    "seneca": "^3.3.0"
+    "seneca": "^3.3.0",
+    "singleton": "^1.0.0"
   },
   "devDependencies": {
     "babel-cli": "6.18.0",

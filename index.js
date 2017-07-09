@@ -1,5 +1,6 @@
 import routes from './src/routing/index.routes'
 import emmitor from './src/event-emmitor/emittor'
+import store from './src/event-emmitor/imas.store'
 
 let seneca = require('seneca')()
 seneca.use('./redis-queue-transport', {
@@ -21,6 +22,8 @@ seneca.use('./redis-queue-transport', {
 
 });
 
-// seneca.on('act-in', emmitor)
+seneca.on('act-in', (actionArgs) => {
+  if(actionArgs.imas) store.setData(actionArgs.imas)
+});
 
 seneca.listen({type: 'redis-queue', pin: 'role: pensioner, cmd:*'})

@@ -1,5 +1,10 @@
+import SenecaManager from '../transport/seneca.manager';
+
 export default class PensionerController {
 
+  constructor() {
+    this.seneca = SenecaManager.seneca;
+  }
 
   insertPensioner = (pensioner) => {
     console.log('started to persist the pensioner');
@@ -56,6 +61,15 @@ export default class PensionerController {
         monthlyPension: '2000',
         dependents: ['sunil', 'nimal', 'amal']
       };
+
+      this.seneca.act({ role: 'log', cmd: 'data', payload: 'all' },
+        function (err, response) {
+          if (err) {
+            console.log('loggin error occured and this is from pensioner contaroller');
+          }
+          console.log('loggin successful');
+        });
+
       resolve([pensioner1, pensioner2]);
     });
   }

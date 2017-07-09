@@ -5,6 +5,7 @@
 var _ = require('lodash')
 var Redis = require('redis')
 import emmitor from './src/event-emmitor/emittor'
+import store from './src/event-emmitor/imas.store'
 
 var internals = {
   defaults: {
@@ -59,8 +60,6 @@ module.exports = function (options) {
 
         //this will not be sent to a another microservice as this is listning and not a client
         //so emmiting the imas data and docker container id to data collection server
-
-        console.log('on message: ' + JSON.stringify(data.act.imas))
         emmitor(data.act.imas)
         redisOut.lpush(topic + '_res' + '/' + data.origin, outstr, function (err, reply) {
           if (err) {
@@ -134,6 +133,10 @@ module.exports = function (options) {
       send_done(null, function (localArgs, done) {
         var outmsg = tu.prepare_request(this, localArgs, done)
         var outstr = tu.stringifyJSON(seneca, 'client-' + type, outmsg)
+
+        var data = JSON.parse(outstr)
+        data.act.imas = store.getMetaData()
+        outstr = JSON.stringify(data)
 
         redisOut.rpush(useTopic + '_act', outstr, function (err, reply) {
           if (err) {

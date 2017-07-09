@@ -41,15 +41,14 @@ function getDockerContainerId() {
 
 function saveUrlMeta(imas) {
     imas.inboundType = "2"
-    console.log('container id is : ', containerId)
-    imas.containerId = containerId
-
-    console.log('this is saveUrlMeta method' + JSON.stringify(imas))
+    imas.containerId = 'containerId'
+    imas.tag = process.env.IMAS_TAG
 
     var data = JSON.stringify(imas)
+    console.log('this is a loggggggggggggggggggggggggggggggggggggggggggggggggggg ', data)
     return new Promise((resolve, reject) => {
         var options = {
-            host: 'localhost',
+            host: '10.131.63.120',
             port: 8080,
             path: '/imas-data-collector/api/data',
             method: 'POST',
