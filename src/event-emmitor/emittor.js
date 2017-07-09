@@ -49,7 +49,7 @@ function saveUrlMeta(imas) {
     var data = JSON.stringify(imas)
     return new Promise((resolve, reject) => {
         var options = {
-            host: 'localhost',
+            host: '0.0.0.0',
             port: 8080,
             path: '/imas-data-collector/api/data',
             method: 'POST',

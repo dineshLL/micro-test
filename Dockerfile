@@ -10,7 +10,7 @@ COPY package.json /usr/src/app/
 RUN npm install
 
 # update apt-get
-RUN apt-get update
+#RUN apt-get update
 
 # Bundle app source
 COPY . /usr/src/app
