@@ -9,8 +9,9 @@ WORKDIR /usr/src/app
 COPY package.json /usr/src/app/
 RUN npm install
 
-# update apt-get
-#RUN apt-get update
+# set the service tah here
+# Environment Variables
+ENV IMAS-TAG service-one
 
 # Bundle app source
 COPY . /usr/src/app
