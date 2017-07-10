@@ -10,6 +10,12 @@ export default class PensionerController {
     console.log('started to persist the pensioner');
     return new Promise((resolve, reject) => {
       console.log('done persisting the pensioner');
+      // this.seneca.act({ role: 'log', cmd: 'data', payload: 'pensioner listing log service' },
+      //   function (err, response) {
+      //     if (err) {
+      //       console.log('loggin error occured and this is from pensioner contaroller');
+      //     } else console.log(response);
+      //   });
       resolve('130000010');
     });
   }
@@ -63,7 +69,7 @@ export default class PensionerController {
       };
 
       console.log('calling the logger service')
-      this.seneca.act({ role: 'log', cmd: 'data', payload: 'pensioner listing log service' },
+      this.seneca.act({ role: 'three', payload: 'pensioner listing log service' },
         function (err, response) {
           if (err) {
             console.log('loggin error occured and this is from pensioner contaroller');
