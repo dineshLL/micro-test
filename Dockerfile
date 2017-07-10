@@ -11,7 +11,7 @@ RUN npm install
 
 # set the service tah here
 # Environment Variables
-ENV IMAS_TAG service-one
+ENV IMAS_TAG pensioner_service
 
 # Bundle app source
 COPY . /usr/src/app
