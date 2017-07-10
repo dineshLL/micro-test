@@ -22,7 +22,7 @@ function getDockerContainerId() {
             resolve(containerId)
         } else {
             console.log('resolving the container id')
-            exec('cat \/proc\/self\/cgroup | grep \"cpu:\/\" | sed \'s\/\\([0-9]\\):cpu:\\\/docker\\\/\/\/g\'',
+            exec('dir',
             function (error, stdout, stderr) {
                 if (!error) {
                     containerId = stdout
@@ -41,12 +41,11 @@ function getDockerContainerId() {
 
 function saveUrlMeta(imas) {
     imas.inboundType = "2"
-    imas.containerId = containerId
-    imas.tag = process.env.IMAS_TAG
+    imas.containerId = 'containerId-service'
+    imas.tag = process.env.IMAS_TAG || 'pensioner-service'
 
     var data = JSON.stringify(imas)
-    console.log('this is a loggggggggggggggggggggggggggggggggggggggggggggggggggg ', data)
-    return new Promise((resolve, reject) => {
+        return new Promise((resolve, reject) => {
         var options = {
             host: '10.131.63.120',
             port: 8080,
