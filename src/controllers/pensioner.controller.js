@@ -62,11 +62,12 @@ export default class PensionerController {
         dependents: ['sunil', 'nimal', 'amal']
       };
 
+      console.log('calling the logger service')
       this.seneca.act({ role: 'log', cmd: 'data', payload: 'pensioner listing log service' },
         function (err, response) {
           if (err) {
             console.log('loggin error occured and this is from pensioner contaroller');
-          } else console.log('loggin successful');
+          } else console.log(response);
         });
 
       resolve([pensioner1, pensioner2]);
